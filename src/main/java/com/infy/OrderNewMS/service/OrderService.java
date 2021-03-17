@@ -52,14 +52,14 @@ public class OrderService {
 		logger.info("Adding request for productsordered {}", productsOrderedDTO);
 		int quantity=productsOrderedDTO.getQuantity();
 		System.out.println(quantity);
-		String getUrl="http://localhost:8200/products/"+productsOrderedDTO.getProdId();
+		String getUrl="http://localhost:8300/products/"+productsOrderedDTO.getProdId();
 		ProductDTO productdto=new RestTemplate().getForEntity(getUrl,ProductDTO.class).getBody();
 		System.out.println(productdto.getStock());
 		if((productdto.getStock()-quantity)>10){
 			System.out.println(productsOrderedDTO.getProdId());
 			
 			
-			String url = "http://localhost:8200/api/product/updatestock/"+productsOrderedDTO.getProdId()+"/"+quantity;
+			String url = "http://localhost:8300//api/stock/"+productsOrderedDTO.getProdId()+"/"+quantity;
 			RestTemplate restTemplate = new RestTemplate();
 			restTemplate.put(url,boolean.class);
 			ProductsOrdered products = productsOrderedDTO.createEntity();
